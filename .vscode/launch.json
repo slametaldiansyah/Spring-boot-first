@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringApiApplication<spring-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.springtest.SpringApiApplication",
+            "projectName": "spring-api",
+            "args": ""
+        }
+    ]
+}
