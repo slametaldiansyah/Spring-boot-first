@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import com.springtest.models.entities.Product;
+import com.springtest.models.entities.Supplier;
 import com.springtest.models.repos.ProductRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,15 @@ public class ProductService {
 
     public List<Product> findByName(String name){
         return productRepo.findByNameContains(name);
+    }
+
+    public void addSupplier(Supplier Supplier, Long productId){
+        Product product = findOne(productId);
+        
+        if (product == null) {
+            throw new RuntimeException("Product with ID: "+productId+" Not Found");
+        }
+        product.getSuppliers().add(Supplier);
+        save(product);
     }
 }
