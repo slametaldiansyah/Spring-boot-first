@@ -1,8 +1,11 @@
 package com.springtest.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.springtest.dto.ResponseData;
+import com.springtest.dto.SearchData;
 import com.springtest.models.entities.Product;
 import com.springtest.models.entities.Supplier;
 import com.springtest.services.ProductService;
@@ -83,5 +86,25 @@ public class ProductController {
     @PostMapping("/{id}")
     public void addSupplier(@RequestBody Supplier supplier, @PathVariable("id") Long productId){
         productService.addSupplier(supplier, productId);
+    }
+
+    @PostMapping("/search/name")
+    public Product getProductByName(@RequestBody SearchData searchData){
+        return productService.findProductByName(searchData.getSearchKey());
+    }
+
+    @PostMapping("/search/namelike")
+    public List<Product> getProductByNameLike(@RequestBody SearchData searchData){
+        return productService.findProductByNameLike(searchData.getSearchKey());
+    }
+
+    @GetMapping("/search/category/{categoryId}")
+    public List<Product> getProductCategory(@PathVariable("categoryId") Long categoryId){
+        return productService.findProductByCategoryID(categoryId);
+    }
+
+    @GetMapping("/search/supplier/{supplierId}")
+    public List<Product> getProductBySupplier(@PathVariable("supplierId") Long supplierId){
+        return productService.findProductBySupplier(supplierId);
     }
 }
