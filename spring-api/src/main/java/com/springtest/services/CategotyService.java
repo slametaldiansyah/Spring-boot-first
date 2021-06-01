@@ -8,6 +8,7 @@ import com.springtest.models.entities.Category;
 import com.springtest.models.repos.CategoryRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,4 +38,12 @@ public class CategotyService {
         categoryRepo.deleteById(id);
     }
 
+    public Iterable<Category> findByName(String name, Pageable pageable){
+        return categoryRepo.findByNameContains(name, pageable);
+    }
+
+    //menambahkan banyak data harus mengunakan PagingAndSortingRepository diservice
+    public Iterable<Category> saveBatch(Iterable<Category> categories){
+        return categoryRepo.saveAll(categories);
+    }
 }

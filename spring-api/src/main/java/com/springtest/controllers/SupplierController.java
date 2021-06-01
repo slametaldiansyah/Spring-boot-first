@@ -1,8 +1,11 @@
 package com.springtest.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.springtest.dto.ResponseData;
+import com.springtest.dto.SearchData;
 import com.springtest.dto.SupplierData;
 import com.springtest.models.entities.Supplier;
 import com.springtest.services.SupplierService;
@@ -78,5 +81,30 @@ public class SupplierController {
         responseData.setStatus(true);
         responseData.setPayload(supplierService.save(supplier));
         return ResponseEntity.ok(responseData);
+    }
+
+    @PostMapping("/search/byemail")
+    public Supplier findByEmail(@RequestBody SearchData searchData){
+        return supplierService.findByEmail(searchData.getSearchKey());
+    }
+
+    @PostMapping("/search/byname")
+    public List<Supplier> findByNameContains(@RequestBody SearchData searchData){
+        return supplierService.findByNameContains(searchData.getSearchKey());
+    }
+
+    @PostMapping("/search/startsname")
+    public List<Supplier> findByNameStartsWith(@RequestBody SearchData searchData){
+        return supplierService.findByNameStartsWith(searchData.getSearchKey());
+    }
+
+    @PostMapping("/search/endsname")
+    public List<Supplier> findByNameEndsWith(@RequestBody SearchData searchData){
+        return supplierService.findByNameEndsWith(searchData.getSearchKey());
+    }
+
+    @PostMapping("/search/nameoremail")
+    public List<Supplier> findByNameContainsOrEmailContains(@RequestBody SearchData searchData){
+        return supplierService.findByNameContainsOrEmailContains(searchData.getSearchKey(),searchData.getOtherSearchKey());
     }
 }

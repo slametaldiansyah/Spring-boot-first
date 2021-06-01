@@ -1,5 +1,6 @@
 package com.springtest.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -37,4 +38,23 @@ public class SupplierService {
         supplierRepo.deleteById(id);
     }
 
+    public Supplier findByEmail(String email){
+        return supplierRepo.findByEmail(email);
+    }
+
+    public List<Supplier> findByNameContains(String name){
+        return supplierRepo.findByNameContains(name);
+    }
+
+    public List<Supplier> findByNameStartsWith(String name){
+        return supplierRepo.findByNameStartsWith(name);
+    }
+
+    public List<Supplier> findByNameEndsWith(String name){
+        return supplierRepo.findByNameEndsWith(name);
+    }
+
+    public List<Supplier> findByNameContainsOrEmailContains(String name, String email){
+        return supplierRepo.findByNameContainsOrEmailContains(name, email);
+    }
 }
